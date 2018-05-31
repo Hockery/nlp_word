@@ -1,9 +1,11 @@
 
-fo = open("a.txt", "r+", encoding='utf_16_le')# ,encoding='latin-1'
-i = 100
-while i:
-    str_r = fo.readline()[:-1]
+fo = open("dict_ch.txt", "r+", encoding='utf_16_le')# ,encoding='latin-1'
+# i = 100
+word_num = 0
+str_r = fo.readline()
+while not (str_r==''):
     word = ''
+    str_r = str_r[:-1]
     str_len = len(str_r)
     index = 0
     begin = False
@@ -16,8 +18,10 @@ while i:
             begin = True
         index = index +1
     if len(word) > 1:
-        print ("读取的字符串是 : ", word)
-    i = i -1
+        word_num  = word_num +1
+        print ("[%5d]: "%(word_num), word)
+    str_r = fo.readline()
+    # i = i -1
 fo.close()
 
 
