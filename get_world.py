@@ -2,6 +2,10 @@
 fo = open("dict_ch.txt", "r+", encoding='utf_16_le')# ,encoding='latin-1'
 # i = 100
 word_num = 0
+word_l = []
+key_num = 0
+key_l = {}
+key_lt = []
 str_r = fo.readline()
 while not (str_r==''):
     word = ''
@@ -10,18 +14,33 @@ while not (str_r==''):
     index = 0
     begin = False
     while str_len-index:# '【'
-        if str_r[index] == '】'[0]:
+        if str_r[index] == '】':
             break
         if begin:
             word = word + str_r[index]
-        if str_r[index] == '【'[0]:
+        if str_r[index] == '【':
             begin = True
         index = index +1
     if len(word) > 1:
-        word_num  = word_num +1
-        print ("[%5d]: "%(word_num), word)
+        word_num  += 1
+        # print ("[%05d]: "%(word_num), word)
+        word_l.append(word)
+    elif len(word) == 1 and word not in key_lt:
+        key_num += 1
+        key_lt.append(word)
+        # print ("[%05d]: "%(key_num), word)
     str_r = fo.readline()
     # i = i -1
+
+print(key_lt, word_l)
+for ind, w in enumerate(word_l) :
+    for wt in w: 
+        if wt not in key_l:
+            key_l[wt] = [ind]
+        else:
+            key_l[wt].append(ind)
+
+print(key_l)
 fo.close()
 
 
